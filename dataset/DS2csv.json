@@ -1,0 +1,23 @@
+{
+	"name": "DS2csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS2xlsxblob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "file.csv",
+				"container": "output-assessment2"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
