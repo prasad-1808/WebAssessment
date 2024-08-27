@@ -1,0 +1,17 @@
+{
+	"name": "DS_CustomerTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Connect_To_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "staging",
+			"table": "CustomerTable"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
