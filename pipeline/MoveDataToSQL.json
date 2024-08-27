@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Move Customer Data to Staging SQL",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -57,11 +57,11 @@
 				]
 			},
 			{
-				"name": "Copy data2",
+				"name": "Move Orders Data to Staging SQL",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "Move Customer Data to Staging SQL",
 						"dependencyConditions": [
 							"Succeeded"
 						]
