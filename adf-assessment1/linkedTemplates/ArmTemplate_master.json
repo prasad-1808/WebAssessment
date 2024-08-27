@@ -1,0 +1,112 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-assessment1"
+		},
+		"LSBlobxlsx_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LSBlobxlsx'"
+		},
+		"LS_ConnectToSQL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_ConnectToSQL'"
+		},
+		"LS_Connect_To_SQL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_Connect_To_SQL'"
+		},
+		"LS_blob_csv_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_blob_csv'"
+		},
+		"LS_ConnectToSQL_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "mysqldb-assessment1-server.database.windows.net"
+		},
+		"LS_ConnectToSQL_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "mysqldb-assessment1"
+		},
+		"LS_ConnectToSQL_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "mysqldb-assessment1-server"
+		},
+		"LS_Connect_To_SQL_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "assessment-server-1.database.windows.net"
+		},
+		"LS_Connect_To_SQL_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "prasad"
+		},
+		"LS_Connect_To_SQL_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "prasad"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adf-assessment1_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LSBlobxlsx_connectionString": {
+						"value": "[parameters('LSBlobxlsx_connectionString')]"
+					},
+					"LS_ConnectToSQL_password": {
+						"value": "[parameters('LS_ConnectToSQL_password')]"
+					},
+					"LS_Connect_To_SQL_password": {
+						"value": "[parameters('LS_Connect_To_SQL_password')]"
+					},
+					"LS_blob_csv_connectionString": {
+						"value": "[parameters('LS_blob_csv_connectionString')]"
+					},
+					"LS_ConnectToSQL_properties_typeProperties_server": {
+						"value": "[parameters('LS_ConnectToSQL_properties_typeProperties_server')]"
+					},
+					"LS_ConnectToSQL_properties_typeProperties_database": {
+						"value": "[parameters('LS_ConnectToSQL_properties_typeProperties_database')]"
+					},
+					"LS_ConnectToSQL_properties_typeProperties_userName": {
+						"value": "[parameters('LS_ConnectToSQL_properties_typeProperties_userName')]"
+					},
+					"LS_Connect_To_SQL_properties_typeProperties_server": {
+						"value": "[parameters('LS_Connect_To_SQL_properties_typeProperties_server')]"
+					},
+					"LS_Connect_To_SQL_properties_typeProperties_database": {
+						"value": "[parameters('LS_Connect_To_SQL_properties_typeProperties_database')]"
+					},
+					"LS_Connect_To_SQL_properties_typeProperties_userName": {
+						"value": "[parameters('LS_Connect_To_SQL_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

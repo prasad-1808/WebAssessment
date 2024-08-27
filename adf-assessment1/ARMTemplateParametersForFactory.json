@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-assessment1"
+		},
+		"LSBlobxlsx_connectionString": {
+			"value": ""
+		},
+		"LS_ConnectToSQL_password": {
+			"value": ""
+		},
+		"LS_Connect_To_SQL_password": {
+			"value": ""
+		},
+		"LS_blob_csv_connectionString": {
+			"value": ""
+		},
+		"LS_ConnectToSQL_properties_typeProperties_server": {
+			"value": "mysqldb-assessment1-server.database.windows.net"
+		},
+		"LS_ConnectToSQL_properties_typeProperties_database": {
+			"value": "mysqldb-assessment1"
+		},
+		"LS_ConnectToSQL_properties_typeProperties_userName": {
+			"value": "mysqldb-assessment1-server"
+		},
+		"LS_Connect_To_SQL_properties_typeProperties_server": {
+			"value": "assessment-server-1.database.windows.net"
+		},
+		"LS_Connect_To_SQL_properties_typeProperties_database": {
+			"value": "prasad"
+		},
+		"LS_Connect_To_SQL_properties_typeProperties_userName": {
+			"value": "prasad"
+		}
+	}
+}
