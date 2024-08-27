@@ -1,0 +1,137 @@
+{
+	"name": "Filteration",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_CustomerTable",
+						"type": "DatasetReference"
+					},
+					"name": "CustomerSource"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_OrderTable",
+						"type": "DatasetReference"
+					},
+					"name": "OrderSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Prep_Customer",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_Prep_Order",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "sort1"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "sort2"
+				},
+				{
+					"name": "window2"
+				},
+				{
+					"name": "filter2"
+				},
+				{
+					"name": "sort3"
+				},
+				{
+					"name": "sort4"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CustomerID as string,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Email as string,",
+				"          PhoneNumber as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          State as string,",
+				"          ZipCode as string,",
+				"          Country as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> CustomerSource",
+				"source(output(",
+				"          OrderID as string,",
+				"          ProductID as string,",
+				"          ProductName as string,",
+				"          Quantity as integer,",
+				"          OrderTimestamp as date,",
+				"          Price as float,",
+				"          CustomerID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> OrderSource",
+				"CustomerSource sort(asc(CustomerID, true)) ~> sort1",
+				"sort1 window(over(CustomerID),",
+				"     asc(CustomerID, true),",
+				"     IsDuplicate = lag(CustomerID, 1, 1) ) ~> window1",
+				"window1 filter(IsDuplicate != CustomerID) ~> filter1",
+				"OrderSource derive({product-customer-id} = ProductID+'-'+CustomerID+'-'+OrderID) ~> derivedColumn1",
+				"derivedColumn1 sort(asc({product-customer-id}, true)) ~> sort2",
+				"sort2 window(over({product-customer-id}),",
+				"     asc({product-customer-id}, true),",
+				"     isDuplicateId = lag({product-customer-id},1,1)) ~> window2",
+				"window2 filter(isDuplicateId != {product-customer-id}) ~> filter2",
+				"filter2 sort(asc(OrderID, true)) ~> sort3",
+				"filter1 sort(asc(CustomerID, true)) ~> sort4",
+				"sort4 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"sort3 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 2,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
+			]
+		}
+	}
+}

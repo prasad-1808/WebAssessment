@@ -1,0 +1,16 @@
+{
+	"name": "DS_Reporting_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Connect_To_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "report",
+			"table": "ReportTable"
+		}
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"name": "DS_Prep_Customer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Connect_To_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "prep",
+			"table": "CustomerTable"
+		}
+	}
+}
