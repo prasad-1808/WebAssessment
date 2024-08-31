@@ -1,0 +1,20 @@
+{
+	"name": "DSBlobExcel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_connectblob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "first"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}

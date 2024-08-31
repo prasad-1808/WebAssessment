@@ -1,0 +1,20 @@
+{
+	"name": "DSExcelSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Connect_To_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"schemaname": {
+				"type": "string"
+			},
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
